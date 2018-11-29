@@ -7,6 +7,8 @@ FORCE=0
 
 APPNAME=
 BUNDLEID=
+VERSION=1.0
+HIGHDPI="true"
 
 while :
 do
@@ -29,6 +31,14 @@ do
             ;;
         -b|--bundleid)
             BUNDLEID="$2"
+            shift
+            ;;
+        -v|--version)
+            VERSION="$2"
+            shift
+            ;;
+        -d|--highdpi)
+            HIGHDPI="$2"
             shift
             ;;
         -f|--force)
@@ -122,7 +132,7 @@ cat >$APP/Contents/Info.plist <<EOL
         <key>CFBundleIdentifier</key>
         <string>$BUNDLEID</string>
         <key>CFBundleVersion</key>
-        <string>1</string>
+        <string>$VERSION</string>
         <key>CFBundleSignature</key>
         <string>$APPNAME</string>
         <key>CFBundleExecutable</key>
@@ -130,7 +140,7 @@ cat >$APP/Contents/Info.plist <<EOL
 
         <!-- Enable High DPI -->
         <key>NSHighResolutionCapable</key>
-        <true/>
+        <$HIGHDPI/>
         <key>NSHighResolutionMagnifyAllowed</key>
         <false/>
 
